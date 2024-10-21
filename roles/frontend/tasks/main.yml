@@ -1,19 +1,9 @@
-    - name: Add epel-release repo
-      yum:
-        name: epel-release
-        state: present
-
-    - name: Install nginx
-      yum:
+    - name: install nginx
+      ansible.builtin.yum:
         name: nginx
-        state: present
+        state: installed
 
-    - name: Insert Index Page
-      template:
-        src: index.html
-        dest: /usr/share/nginx/html/index.html
-
-    - name: Start NGiNX
-      service:
+    - name: start nginx
+      ansible.builtin.systemd:
         name: nginx
         state: started
