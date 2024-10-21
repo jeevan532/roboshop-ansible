@@ -1,3 +1,9 @@
-- name: hello world
-  ansible.builtin.debug:
-    msg: hello world from frontend
+- name: install nginx
+  ansible.builtin.yum:
+    name: nginx
+    state: installed
+
+- name: start nginx
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
