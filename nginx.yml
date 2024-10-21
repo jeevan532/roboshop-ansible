@@ -4,11 +4,11 @@
   become: yes
   tasks:
     - name: install nginx
-      ansible.builtin.shell:
+      ansible.builtin.yum:
         - name: nginx
           state: installed
 
     - name: start nginx
-      ansible.builtin.shell:
+      ansible.builtin.yum:
         - name: start nginx
           state: started
