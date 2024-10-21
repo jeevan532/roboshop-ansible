@@ -1,6 +1,5 @@
 - name: Roboshop setup
   hosts: all
   become: yes
-  connection: ssh
   roles:
-    - "{{ role_name }}"
+    - "{{role_name}}"
