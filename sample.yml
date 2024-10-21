@@ -1,7 +1,0 @@
-- name: demo
-  hosts: all
-  become: yes
-  tasks:
-    - name: dummy
-      ansible.builtin.debug:
-        msg: hello world
