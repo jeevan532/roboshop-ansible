@@ -1,6 +1,6 @@
 - name: install mongodb
   ansible.builtin.template:
-    src: mongo.repo
+    src: mongodb.repo
     dest: /etc/yum.repos.d/mongodb.repo
 
 - name: install mongodb
