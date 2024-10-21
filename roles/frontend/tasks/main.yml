@@ -3,7 +3,27 @@
     name: nginx
     state: installed
 
+- name: remove html content
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+- name: creating directory
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: directory
+
+- name: Unarchive a file that is already on the remote machine
+  ansible.builtin.unarchive:
+    src: curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend.zip
+    dest: /usr/share/nginx/html
+    remote_src: yes
+- name: copy roboshop conf file
+  ansible.builtin.copy:
+    src: roboshop.conf
+    dest: /etc/nginx/default.d/roboshop.conf
+
 - name: start nginx
   ansible.builtin.systemd:
+    state: restarted
     name: nginx
-    state: started
+    enabled: yes
