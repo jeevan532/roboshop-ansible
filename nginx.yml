@@ -1,13 +1,7 @@
----
-- name: install nginx
+- name: Demo
   hosts: all
-  become: yes
   tasks:
-    - name: install nginx
-      ansible.builtin.yum:
-        - name: nginx
-          state: installed
-    - name: start nginx
-      ansible.builtin.systemd:
-        - name: start nginx
-          state: started
+    - name: Print Helo
+      ansible.builtin.debug:
+        msg: Hello Universe
+
