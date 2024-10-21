@@ -9,6 +9,6 @@
                state: installed
 
           - name: start nginx
-            ansible.builtin.yum:
+            ansible.builtin.systemd:
                - name: start nginx
                  state: started
