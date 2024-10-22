@@ -51,8 +51,8 @@
   ansible.builtin.yum:
     name: mongodb-org-shell -y
 
-- name: Run a js file containing MongoDB commands with pseudo-idempotency
+- name: load schema
   community.mongodb.mongodb_shell:
   file: "/app/schema/catalogue.js"
-  idempotent: yes
+  idempotent: true
   login_host: mongod-dev.devops007.online
