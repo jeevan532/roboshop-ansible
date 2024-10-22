@@ -19,7 +19,7 @@
 - name: create app dir
   ansible.builtin.file:
     name: /app
-    state: present
+    state: directory
 
 - name: download app content
   ansible.builtin.unarchive:
