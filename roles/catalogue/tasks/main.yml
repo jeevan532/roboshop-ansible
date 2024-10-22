@@ -34,7 +34,7 @@
 # setting up service ansible.builtin.file:
 
 - name: copy systemd file
-  ansible.builtin.copy:
+  ansible.builtin.template:
     src: catalogue.service
     dest: /etc/systemd/system/catalogue.service
     remote_src: yes
@@ -42,7 +42,7 @@
 - name: start service
   ansible.builtin.systemd:
     name: catalogue
-    state: restart
+    state: restarted
     enabled: true
     daemon_reload: true
 
