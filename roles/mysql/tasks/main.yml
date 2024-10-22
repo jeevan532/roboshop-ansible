@@ -7,8 +7,8 @@
     dest: /etc/yum.repos.d/mysql.repo
 
 - name: install mysqld
-  ansible.builtin.dnf:
-    name: mysqld
+  ansible.builtin.yum:
+    name: mysql-community-server -y
     state: present
 
 - name: start mysql
