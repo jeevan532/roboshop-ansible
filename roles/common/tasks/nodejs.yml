@@ -1,0 +1,21 @@
+- name: configuring yum repos
+  ansible.builtin.shell: curl –sL https://rpm.nodesource.com/setup_10.x | bash
+
+- name: install nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: add pre-req
+  ansible.builtin.include_tasks: "app-prereq.yml"
+
+- name: Install packages based on package.json using the npm installed with nvm v0.10.1.
+  community.general.npm:
+    path: /app
+    state: latest
+
+- name: systemd setup
+  ansible.builtin.include_tasks: "systemd.yml"
+
+- name: load schema
+  ansible.builtin.include_tasks: "{{schema_type}}-schema.yml"

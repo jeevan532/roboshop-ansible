@@ -18,7 +18,3 @@
     dest: /app
     remote_src: yes
 
-- name: Install packages based on package.json using the npm installed with nvm v0.10.1.
-  community.general.npm:
-    path: /app
-    state: latest

@@ -1,0 +1,24 @@
+- name: download java
+  ansible.builtin.yum:
+    name: java-11-openjdk
+    state: installed
+
+- name: install maven
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: add pre-req
+  ansible.builtin.include_tasks: "app-prereq.yml"
+
+- name: download dependencies
+  ansible.builtin.shell: mvn clean package ; mv target/{{component}}-1.0.jar {{component}}.jar
+  args:
+    chdir: /app
+
+- name: systemd setup
+  ansible.builtin.include_tasks: "systemd.yml"
+
+- name: load schema
+  ansible.builtin.include_tasks: "{{schema_type}}-schema.yml"
+  when: schema_load

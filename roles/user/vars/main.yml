@@ -1,0 +1,4 @@
+component: user
+schema_load: false
+#app_version: 1.0.2
+#service_name: catalogue
