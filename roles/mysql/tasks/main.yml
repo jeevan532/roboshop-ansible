@@ -1,5 +1,5 @@
 - name: disable mysqld
-  ansible.builtin.shell: dnf module disabale mysql -y
+  ansible.builtin.shell: dnf module disable mysql -y
 
 - name: copy mysqld conf file
   ansible.builtin.template:
