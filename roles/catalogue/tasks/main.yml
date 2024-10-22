@@ -1,3 +1,59 @@
-- name: hello world
-  ansible.builtin.debug:
-    msg: hello world from catalogue
+- name: download nodejs config file
+  ansible.builtin.shell: dnf module enable nodejs:18 -y
+
+- name: install nodejs
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+# APP PRE-REQUISITES
+- name: add app user
+  ansible.builtin.user:
+    name: roboshop
+
+- name: remove old content
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: create app dir
+  ansible.builtin.file:
+    name: /app
+    state: present
+
+- name: download {{role_name}} app content
+  ansible.builtin.unarchive:
+    src: curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+    dest: /app
+  remote_src: yes
+
+- name: Install packages based on package.json using the npm installed with nvm v0.10.1.
+  community.general.npm:
+    path: /app
+    state: present
+# setting up service ansible.builtin.file:
+
+- name: copy systemd file
+  ansible.builtin.copy:
+    src: catalogue.service
+    dest: /etc/systemd/system/catalogue.service
+
+- name: start service
+  ansible.builtin.systemd:
+    name: catalogue
+    state: restart
+    enabled: true
+    daemon_reload: true
+
+# load schema
+
+- name: install mongodb
+  ansible.builtin.yum:
+    name: mongodb-org-shell -y
+
+- name: Run a js file containing MongoDB commands with pseudo-idempotency
+  community.mongodb.mongodb_shell:
+  login_host: mongod-dev.devops007.online
+  file: "/app/schema/catalogue.js"
+  idempotent: yes
+
