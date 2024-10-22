@@ -3,4 +3,4 @@
   become: yes
   connection: ssh
   roles:
-    - "{{ROLE_NAME}}"
+    - "{{role_name}}"
