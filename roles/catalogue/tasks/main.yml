@@ -25,7 +25,7 @@
   ansible.builtin.unarchive:
     src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
     dest: /app
-  remote_src: yes
+  remote_src: true
 
 - name: Install packages based on package.json using the npm installed with nvm v0.10.1.
   community.general.npm:
