@@ -30,13 +30,14 @@
 - name: Install packages based on package.json using the npm installed with nvm v0.10.1.
   community.general.npm:
     path: /app
-    state: present
+    state: latest
 # setting up service ansible.builtin.file:
 
 - name: copy systemd file
   ansible.builtin.copy:
     src: catalogue.service
     dest: /etc/systemd/system/catalogue.service
+    remote_src: yes
 
 - name: start service
   ansible.builtin.systemd:
