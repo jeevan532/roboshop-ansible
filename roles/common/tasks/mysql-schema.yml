@@ -1,0 +1,27 @@
+- name: copy mysql conf file
+  ansible.builtin.file:
+    src: mysql.conf
+    dest: /etc/systemd/system/mysql.conf
+
+- name: install mysqld
+  ansible.builtin.yum:
+    name: mysql-community-server -y
+    state: present
+
+- name: start mysql
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
+
+- name: set mysql root password
+  ansible.builtin.shell: mysql_secure_installation --set-root-pass {{mysql_root_password}}
+  ignore_errors: yes
+
+    - name: Try to create database as root/nopassword first. If not allowed, pass the credentials
+      community.mysql.mysql_db:
+        check_implicit_admin: true
+        login_user: bob
+        login_password: 123456
+        name: bobdata
+        state: present

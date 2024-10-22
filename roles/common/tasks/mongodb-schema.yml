@@ -1,0 +1,9 @@
+- name: install mongodb
+  ansible.builtin.yum:
+    name: mongodb-org-shell -y
+
+- name: load schema
+  community.mongodb.mongodb_shell:
+    file: "/app/schema/catalogue.js"
+    idempotent: true
+    login_host: mongod-dev.devops007.online
