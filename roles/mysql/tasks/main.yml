@@ -1,0 +1,24 @@
+- name: disable mysqld
+  ansible.builtin.shell: dnf module disabale mysql -y
+
+- name: copy mysqld conf file
+  ansible.builtin.template:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: install mysqld
+  ansible.builtin.dnf:
+    name: mysqld
+    state: present
+
+- name: start mysql
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
+
+- name: set mysql root password
+  ansible.builtin.shell: mysql_secure_installation --set-root-pass {{mysql_root_password}}
+  ignore_errors: yes
+
+
