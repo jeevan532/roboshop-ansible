@@ -2,7 +2,7 @@
   ansible.builtin.template:
     src: "{{component}}.service"
     dest: /etc/systemd/system/{{component}}.service
-    remote_src: yes
+#    remote_src: yes
 
 - name: start service
   ansible.builtin.systemd:
@@ -10,3 +10,15 @@
     state: restarted
     enabled: yes
     daemon_reload: yes
+
+#      - name: COpy SystemD file
+#        ansible.builtin.template:
+#          src: "{{component}}.service"
+#          dest: /etc/systemd/system/{{component}}.service
+#
+#      - name: Start {{component}} Service
+#        ansible.builtin.systemd:
+#          name: "{{component}}"
+#          daemon_reload: yes
+#          enabled: yes
+#          state: restarted
