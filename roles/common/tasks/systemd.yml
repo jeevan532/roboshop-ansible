@@ -8,5 +8,5 @@
   ansible.builtin.systemd:
     name: "{{component}}"
     state: restarted
-    enabled: true
-    daemon_reload: true
+    enabled: yes
+    daemon_reload: yes
