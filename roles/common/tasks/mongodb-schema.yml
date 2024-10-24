@@ -9,7 +9,7 @@
     state: installed
 
 - name: load schema
-  community.mongodb.shell: mongo -ssl --host mongod-dev.devops007.online </app/schema/catalogue.js
+  community.mongodb.shell: mongo --ssl --host mongod-dev.devops007.online </app/schema/catalogue.js
 #    file: "/app/schema/{{component}}.js"
 #    idempotent: true
 #    login_host: mongod-dev.devops007.online
