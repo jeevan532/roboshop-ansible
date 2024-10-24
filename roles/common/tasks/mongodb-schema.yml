@@ -5,7 +5,7 @@
 
 - name: install mongodb
   ansible.builtin.yum:
-    name: mongodb-org-shell -y
+    name: mongodb-org-shell
 
 - name: load schema
   community.mongodb.mongodb_shell:
