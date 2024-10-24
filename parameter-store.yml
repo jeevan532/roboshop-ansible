@@ -4,4 +4,4 @@
   hosts: all
   tasks:
     - name: lookup ssm parameter store in specified region
-      debug: msg="{{ lookup('amazon.aws.aws_ssm', 'test', region='us-east-1' ) }}"
+      debug: msg="{{ lookup('amazon.aws.aws_ssm', 'test') }}"
